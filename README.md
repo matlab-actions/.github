@@ -1,4 +1,4 @@
-# GitHub Actions for MATLAB
+# Use MATLAB with GitHub Actions
 With [GitHub&reg; actions](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions) for MATLAB&reg;, you can run MATLAB scripts, functions, and statements as part of your workflow. You also can run your MATLAB and Simulink&reg; tests and generate artifacts such as JUnit test results and Cobertura code coverage reports. The actions let you run MATLAB code and Simulink models on [self-hosted](https://docs.github.com/en/free-pro-team@latest/actions/hosting-your-own-runners/about-self-hosted-runners) or [GitHub-hosted](https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners) runners:
 
 - If you want to use a self-hosted runner, you must set up a computer with MATLAB (R2013b or later) as your runner. The runner uses the first MATLAB version on the system path to execute your workflow.
@@ -29,25 +29,6 @@ When you define your workflow, you can specify this action as `matlab-actions/ru
 
 ## Examples
 
-### Run MATLAB Script on Self-Hosted Runner
-Use a self-hosted runner to run the commands in a file named `myscript.m` in the root of your repository. To run the commands, specify the **Run MATLAB Command** action in your workflow.
-
-```yaml
-name: Run MATLAB Script on Self-Hosted Runner
-on: [push]
-jobs:
-  my-job:
-    name: Run MATLAB Script
-    runs-on: self-hosted
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-      - name: Run script
-        uses: matlab-actions/run-command@v0
-        with:
-          command: myscript
-```
-
 ### Run MATLAB Tests on GitHub-Hosted Runner
 Set up a GitHub-hosted runner to automatically run the tests in your [MATLAB project](https://www.mathworks.com/help/matlab/projects.html) and generate a JUnit test results report and a Cobertura code coverage report. To install the latest release of MATLAB on the runner, specify the **Set Up MATLAB** action in your workflow. To run the tests and generate the artifacts, specify the **Run MATLAB Tests** action.
 
@@ -68,6 +49,25 @@ jobs:
         with:
           test-results-junit: test-results/results.xml
           code-coverage-cobertura: code-coverage/coverage.xml
+```
+
+### Run MATLAB Script on Self-Hosted Runner
+Use a self-hosted runner to run the commands in a file named `myscript.m` in the root of your repository. To run the commands, specify the **Run MATLAB Command** action in your workflow.
+
+```yaml
+name: Run MATLAB Script on Self-Hosted Runner
+on: [push]
+jobs:
+  my-job:
+    name: Run MATLAB Script
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Run script
+        uses: matlab-actions/run-command@v0
+        with:
+          command: myscript
 ```
 
 ## Notes
