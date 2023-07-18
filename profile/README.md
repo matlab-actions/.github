@@ -93,6 +93,36 @@ jobs:
           command: myscript
 ```
 
+### Specify MATLAB Version on Self-Hosted Runner
+When you use the **Run MATLAB Build**, **Run MATLAB Tests**, or **Run MATLAB Command** action in your workflow, the self-hosted runner uses the topmost MATLAB version on the system path. The build fails if the runner cannot find any version of MATLAB on the path.
+
+You can prepend your preferred version of MATLAB to the PATH environment variable of the runner. For example, prepend MATLAB R2023a to the path and use it to run your script.
+
+```YAML
+name: Run MATLAB Script on Self-Hosted Runner
+on: [push]
+jobs:
+  my-job:
+    name: Run MATLAB Script
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3 
+      - name: Prepend MATLAB to PATH on Windows (PowerShell)
+        if: runner.os == 'Windows'
+        run: echo "C:\Program Files\MATLAB\R2023a\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append     
+      - name: Prepend MATLAB to PATH on Linux
+        if: runner.os == 'Linux'
+        run: echo "/usr/local/MATLAB/R2023a/bin" >> $GITHUB_PATH
+      - name: Prepend MATLAB to PATH on macOS
+        if: runner.os == 'macOS'
+        run: echo "/Applications/MATLAB_R2023a.app/bin" >> $GITHUB_PATH
+      - name: Run script
+        uses: matlab-actions/run-command@v1
+        with:
+          command: myscript
+```
+
 ## Notes
 * To use the GitHub actions for MATLAB, enable GitHub Actions for your repository. For more information about GitHub Actions permissions, see [Managing GitHub Actions settings for a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository).
 * The **Run MATLAB Build** action uses the `-batch` option to invoke the [`buildtool`](https://www.mathworks.com/help/matlab/ref/buildtool.html) command. In addition, in MATLAB R2019a and later, the **Run MATLAB Tests** and **Run MATLAB Command** actions use  the `-batch` option to start MATLAB noninteractively. Preferences do not persist across different MATLAB sessions launched with the `-batch` option. To run code that requires the same preferences, use a single action.
