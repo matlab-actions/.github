@@ -96,7 +96,7 @@ jobs:
 ### Specify MATLAB Version on Self-Hosted Runner
 When you use the **Run MATLAB Build**, **Run MATLAB Tests**, or **Run MATLAB Command** action in your workflow, the self-hosted runner uses the topmost MATLAB version on the system path. The build fails if the runner cannot find any version of MATLAB on the path.
 
-You can prepend your preferred version of MATLAB to the PATH environment variable of the runner. For example, prepend MATLAB R2023a to the path and use it to run your script.
+You can prepend your preferred version of MATLAB to the `PATH` environment variable of the runner. For example, prepend MATLAB R2023a to the path and use it to run your script. The step depends on your operating system and MATLAB root folder.
 
 ```YAML
 name: Run MATLAB Script on Self-Hosted Runner
