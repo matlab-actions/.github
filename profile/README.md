@@ -1,25 +1,21 @@
 # Use MATLAB with GitHub Actions
-With [GitHub&reg; Actions](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions), you can build and test your MATLAB&reg; project as part of your workflow. For example, you can automatically identify any code issues in your project, run tests and generate test and coverage artifacts, or package your files into a toolbox. The actions let you run MATLAB code and Simulink&reg; models on [self-hosted](https://docs.github.com/en/free-pro-team@latest/actions/hosting-your-own-runners/about-self-hosted-runners) or [GitHub-hosted](https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners) runners:
-
-- To use a self-hosted runner, you must set up a computer with MATLAB as your runner. The runner uses the topmost MATLAB version on the system path to execute your workflow.
-
-- To use a GitHub-hosted runner, you must include the [Setup MATLAB](#setup-matlab) action in your workflow to set up MATLAB on the runner. Currently, this action is available only for public projects. It does not set up transformation products, such as MATLAB Coder&trade; and MATLAB Compiler&trade;.
+With [GitHub&reg; Actions](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions), you can build and test your MATLAB&reg; project as part of your workflow. For example, you can automatically identify any code issues in your project, run tests and generate test and coverage artifacts, and package your files into a toolbox. The GitHub actions for MATLAB let you run MATLAB code and Simulink&reg; models on [self-hosted](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) or [GitHub-hosted](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners) runners. The actions use the topmost MATLAB version on the system path.
 
 ## Overview of Actions
 To run MATLAB in your workflow, use the appropriate actions when you define your workflow in the `.github/workflows` directory of your repository:
 
-* To set up MATLAB on a GitHub-hosted runner, use the [Setup MATLAB](#setup-matlab) action.
+* To set up your GitHub Actions workflow with a specific version of MATLAB, use the [Setup MATLAB](#setup-matlab) action.
 * To run a MATLAB build, use the [Run MATLAB Build](#run-matlab-build) action.
 * To run MATLAB and Simulink tests and generate artifacts, use the [Run MATLAB Tests](#run-matlab-tests) action.
-* To run a MATLAB script, function, or statement, use the [Run MATLAB Command](#run-matlab-command) action.
+* To run MATLAB scripts, functions, and statements, use the [Run MATLAB Command](#run-matlab-command) action.
 
 ### Setup MATLAB
-Use the **Setup MATLAB** action when you want to run MATLAB code and Simulink models on a GitHub-hosted runner. The action sets up your specified MATLAB release (R2020a or later) on a Linux&reg; virtual machine. If you do not specify a release, the action sets up the latest release of MATLAB.
+Use the **Setup MATLAB** action to run MATLAB code and Simulink models with a specific version of MATLAB. The action sets up your specified MATLAB release (R2020b or later) on a Linux&reg;, Windows&reg;, or macOS&reg; virtual machine. If you do not specify a release, the action sets up the latest release of MATLAB.
 
-When you define your workflow, specify this action as `matlab-actions/setup-matlab@v2`. For more information, see [Action for Setting Up MATLAB on GitHub-Hosted Runner](https://github.com/matlab-actions/setup-matlab/).
+When you define your workflow, specify this action as `matlab-actions/setup-matlab@v2`. For more information, see [Action for Setting Up MATLAB](https://github.com/matlab-actions/setup-matlab/).
 
 ### Run MATLAB Build
-Use the **Run MATLAB Build** action to invoke the MATLAB build tool and run software-build tasks, such as identifying code issues, running tests, or packaging a toolbox. To use this action, you need MATLAB R2022b or a later release.
+Use the **Run MATLAB Build** action to invoke the MATLAB build tool and run build tasks, such as identifying code issues, running tests, and packaging a toolbox. To use this action, you need MATLAB R2022b or a later release.
 
 When you define your workflow, specify this action as `matlab-actions/run-build@v2`. For more information, see [Action for Running MATLAB Builds](https://github.com/matlab-actions/run-build).
 
@@ -36,7 +32,7 @@ When you define your workflow, specify this action as `matlab-actions/run-comman
 ## Examples
 
 ### Run MATLAB Build on Self-Hosted Runner
-Starting in R2022b, the **Run MATLAB Build** action lets you run builds using the MATLAB build tool. You can use this action to run the tasks specified in a file named  `buildfile.m` in the root of your repository. For example, use a self-hosted runner to run the default tasks in your build plan as well as all the tasks on which they depend. To run the tasks, specify the **Run MATLAB Build** action in your workflow.
+Starting in R2022b, the **Run MATLAB Build** action lets you run a build using the MATLAB build tool. You can use this action to run the tasks specified in a file named  `buildfile.m` in the root of your repository. For example, use a self-hosted runner to run the default tasks in your build plan as well as all the tasks on which they depend. To run the tasks, specify the **Run MATLAB Build** action in your workflow.
 
 ```yaml
 name: Run MATLAB Build on Self-Hosted Runner
@@ -94,9 +90,9 @@ jobs:
 ```
 
 ### Specify MATLAB Version on Self-Hosted Runner
-When you use the **Run MATLAB Build**, **Run MATLAB Tests**, or **Run MATLAB Command** action in your workflow, the self-hosted runner uses the topmost MATLAB version on the system path. The build fails if the runner cannot find any version of MATLAB on the path.
+When you use the **Run MATLAB Build**, **Run MATLAB Tests**, or **Run MATLAB Command** action in your workflow, the runner uses the topmost MATLAB version on the system path. The build fails if the runner cannot find any version of MATLAB on the path.
 
-You can prepend your preferred version of MATLAB to the `PATH` environment variable of the runner. For example, prepend MATLAB R2023b to the path and use it to run your script. The step depends on your operating system and MATLAB root folder.
+You can prepend your preferred version of MATLAB to the `PATH` environment variable of the self-hosted runner. For example, prepend MATLAB R2023b to the path and use it to run your script. The step depends on your operating system and MATLAB root folder.
 
 ```YAML
 name: Run MATLAB Script on Self-Hosted Runner
