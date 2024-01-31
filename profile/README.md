@@ -10,7 +10,7 @@ To run MATLAB in your workflow, use the appropriate actions when you define your
 * To run MATLAB scripts, functions, and statements, use the [Run MATLAB Command](#run-matlab-command) action.
 
 ### Setup MATLAB
-Use the **Setup MATLAB** action to run MATLAB code and Simulink models with a specific version of MATLAB. The action sets up your specified MATLAB release (R2020b or later) on a Linux&reg;, Windows&reg;, or macOS&reg; virtual machine. If you do not specify a release, the action sets up the latest release of MATLAB.
+Use the **Setup MATLAB** action to run MATLAB code and Simulink models with a specific version of MATLAB. The action sets up your specified MATLAB release (R2021a or later) on a Linux&reg;, Windows&reg;, or macOS&reg; virtual machine. If you do not specify a release, the action sets up the latest release of MATLAB.
 
 When you define your workflow, specify this action as `matlab-actions/setup-matlab@v2`. For more information, see [Action for Setting Up MATLAB](https://github.com/matlab-actions/setup-matlab/).
 
