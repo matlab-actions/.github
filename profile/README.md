@@ -5,7 +5,7 @@ With [GitHub&reg; Actions](https://docs.github.com/en/free-pro-team@latest/actio
 To run MATLAB in your workflow, use the appropriate actions when you define your workflow in the `.github/workflows` directory of your repository:
 
 * To set up your GitHub Actions workflow with a specific version of MATLAB, use the [Setup MATLAB](#setup-matlab) action.
-* To run a MATLAB build, use the [Run MATLAB Build](#run-matlab-build) action.
+* To run a MATLAB build using the MATLAB build tool, use the [Run MATLAB Build](#run-matlab-build) action.
 * To run MATLAB and Simulink tests and generate artifacts, use the [Run MATLAB Tests](#run-matlab-tests) action.
 * To run MATLAB scripts, functions, and statements, use the [Run MATLAB Command](#run-matlab-command) action.
 
