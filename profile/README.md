@@ -32,7 +32,7 @@ When you define your workflow, specify this action as `matlab-actions/run-comman
 ## Examples
 
 ### Run MATLAB Build on Self-Hosted Runner
-Starting in R2022b, the **Run MATLAB Build** action lets you run a build using the MATLAB build tool. You can use this action to run the tasks specified in a file named  `buildfile.m` in the root of your repository. For example, use a self-hosted runner to run the default tasks in your build plan as well as all the tasks on which they depend. To run the tasks, specify the **Run MATLAB Build** action in your workflow.
+Starting in R2022b, the **Run MATLAB Build** action lets you run a build using the MATLAB build tool. You can use this action to run the tasks specified in a file named  `buildfile.m` in the MATLAB current folder or its parent folders. For example, use a self-hosted runner to run the default tasks in your build plan as well as all the tasks on which they depend. To run the tasks, specify the **Run MATLAB Build** action in your workflow.
 
 ```yaml
 name: Run MATLAB Build on Self-Hosted Runner
