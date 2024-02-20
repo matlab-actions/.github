@@ -32,7 +32,7 @@ When you define your workflow, specify this action as `matlab-actions/run-comman
 ## Examples
 
 ### Run MATLAB Build on Self-Hosted Runner
-Starting in R2022b, the **Run MATLAB Build** action lets you run a build using the MATLAB build tool. You can use this action to run the tasks specified in a file named  `buildfile.m` in the MATLAB current folder or its parent folders. For example, use a self-hosted runner to run the default tasks in your build plan as well as all the tasks on which they depend. To run the tasks, specify the **Run MATLAB Build** action in your workflow.
+Starting in R2022b, the **Run MATLAB Build** action lets you run a build using the MATLAB build tool. You can use this action to run the tasks specified in a file named  `buildfile.m` in the MATLAB current folder (returned by the [`pwd`](https://www.mathworks.com/help/matlab/ref/pwd.html) command) or its parent folders. For example, use a self-hosted runner to run the default tasks in your build plan as well as all the tasks on which they depend. To run the tasks, specify the **Run MATLAB Build** action in your workflow.
 
 ```yaml
 name: Run MATLAB Build on Self-Hosted Runner
@@ -121,6 +121,7 @@ jobs:
 
 ## Notes
 * To use the GitHub actions for MATLAB, enable GitHub Actions for your repository. For more information about GitHub Actions permissions, see [Managing GitHub Actions settings for a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository).
+* By default, when you use the **Run MATLAB Build**, **Run MATLAB Tests**, or **Run MATLAB Command** action, the MATLAB current folder is the same as the root of your repository. To specify a different current folder, use the `-sd` startup option or the `cd` command in your action.
 * The **Run MATLAB Build** action uses the `-batch` option to invoke the [`buildtool`](https://www.mathworks.com/help/matlab/ref/buildtool.html) command. In addition, in MATLAB R2019a and later, the **Run MATLAB Tests** and **Run MATLAB Command** actions use  the `-batch` option to start MATLAB noninteractively. Preferences do not persist across different MATLAB sessions launched with the `-batch` option. To run code that requires the same preferences, use a single action.
 * When you use the **Setup MATLAB**, **Run MATLAB Build**, **Run MATLAB Tests**, and **Run MATLAB Command** actions, you execute third-party code that is licensed under separate terms.
 
