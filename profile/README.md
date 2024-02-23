@@ -121,6 +121,7 @@ jobs:
 
 ## Notes
 * To use the GitHub actions for MATLAB, enable GitHub Actions for your repository. For more information about GitHub Actions permissions, see [Managing GitHub Actions settings for a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository).
+* By default, when you use the **Run MATLAB Build**, **Run MATLAB Tests**, or **Run MATLAB Command** action, the root of your repository serves as the MATLAB startup folder. To run your MATLAB code using a different folder, include the `-sd` startup option or the `cd` command in the action.
 * The **Run MATLAB Build** action uses the `-batch` option to invoke the [`buildtool`](https://www.mathworks.com/help/matlab/ref/buildtool.html) command. In addition, in MATLAB R2019a and later, the **Run MATLAB Tests** and **Run MATLAB Command** actions use  the `-batch` option to start MATLAB noninteractively. Preferences do not persist across different MATLAB sessions launched with the `-batch` option. To run code that requires the same preferences, use a single action.
 * When you use the **Setup MATLAB**, **Run MATLAB Build**, **Run MATLAB Tests**, and **Run MATLAB Command** actions, you execute third-party code that is licensed under separate terms.
 
