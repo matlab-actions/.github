@@ -1,16 +1,19 @@
 # Use MATLAB with GitHub Actions
-With [GitHub&reg; Actions](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions), you can build and test your MATLAB&reg; project as part of your workflow. For example, you can automatically identify any code issues in your project, run tests and generate test and coverage artifacts, and package your files into a toolbox. The GitHub actions for MATLAB let you run MATLAB code and Simulink&reg; models on [self-hosted](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) or [GitHub-hosted](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners) runners.
+With [GitHub&reg; Actions](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions), you can build and test your MATLAB&reg; project as part of your workflow. For example, you can automatically identify any code issues in your project, run tests and generate test and coverage artifacts, and package your files into a toolbox. The GitHub actions for MATLAB let you run MATLAB code and Simulink&reg; models on [self-hosted](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) or [GitHub-hosted](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners) runners:
+
+- To use a self-hosted runner, you must set up a computer with MATLAB as your self-hosted runner and register the runner with GitHub Actions. The runner uses the topmost MATLAB release on the system path to execute your workflow.
+- To use a GitHub-hosted runner, you must include the [Setup MATLAB](#setup-matlab) action in your workflow to set up your preferred MATLAB release (R2021a or later) on the runner.
 
 ## Overview of Actions
 To run MATLAB in your workflow, use these actions when you define your workflow in the `.github/workflows` directory of your repository:
 
-* To set up your GitHub Actions workflow with a specific version of MATLAB, use the [Setup MATLAB](#setup-matlab) action.
+* To set up your GitHub Actions workflow with a specific release of MATLAB, use the [Setup MATLAB](#setup-matlab) action.
 * To run a MATLAB build using the MATLAB build tool, use the [Run MATLAB Build](#run-matlab-build) action.
 * To run MATLAB and Simulink tests and generate artifacts, use the [Run MATLAB Tests](#run-matlab-tests) action.
 * To run MATLAB scripts, functions, and statements, use the [Run MATLAB Command](#run-matlab-command) action.
 
 ### Setup MATLAB
-Use the **Setup MATLAB** action to run MATLAB code and Simulink models with a specific version of MATLAB. The action sets up your specified MATLAB release (R2021a or later) on a Linux&reg;, Windows&reg;, or macOS runner. If you do not specify a release, the action sets up the latest release of MATLAB.
+Use the **Setup MATLAB** action to set up MATLAB and other MathWorks&reg; products on a GitHub-hosted runner. The action sets up your specified MATLAB release (R2021a or later) on a Linux&reg;, Windows&reg;, or macOS runner. If you do not specify a release, the action sets up the latest release of MATLAB.
 
 When you define your workflow, specify this action as `matlab-actions/setup-matlab@v2`. For more information, see [Action for Setting Up MATLAB](https://github.com/matlab-actions/setup-matlab/).
 
@@ -70,11 +73,11 @@ jobs:
           code-coverage-cobertura: code-coverage/coverage.xml
 ```
 
-### Run MATLAB Script on Self-Hosted Runner
+### Run MATLAB Script
 Use a self-hosted runner to run the commands in a file named `myscript.m` in the root of your repository. To run the script, specify the **Run MATLAB Command** action in your workflow.
 
 ```yaml
-name: Run MATLAB Script on Self-Hosted Runner
+name: Run MATLAB Script
 on: [push]
 jobs:
   my-job:
@@ -89,13 +92,13 @@ jobs:
           command: myscript
 ```
 
-### Specify MATLAB Version on Self-Hosted Runner
-When you use the **Run MATLAB Build**, **Run MATLAB Tests**, or **Run MATLAB Command** action in your workflow, the runner uses the topmost MATLAB version on the system path. The action fails if the runner cannot find any version of MATLAB on the path.
+### Specify MATLAB Release on Self-Hosted Runner
+When you use the **Run MATLAB Build**, **Run MATLAB Tests**, or **Run MATLAB Command** action in your workflow, the runner uses the topmost MATLAB release on the system path. The action fails if the runner cannot find any release of MATLAB on the path.
 
-You can prepend your preferred version of MATLAB to the `PATH` system environment variable of the self-hosted runner. For example, prepend MATLAB R2023b to the path and use it to run your script. The step depends on your operating system and MATLAB root folder.
+You can prepend your preferred release of MATLAB to the `PATH` system environment variable of the self-hosted runner. For example, prepend MATLAB R2020b to the path and use it to run a script. The step depends on your operating system and MATLAB root folder.
 
 ```YAML
-name: Run MATLAB Script on Self-Hosted Runner
+name: Specify MATLAB Release on Self-Hosted Runner
 on: [push]
 jobs:
   my-job:
@@ -106,17 +109,45 @@ jobs:
         uses: actions/checkout@v4
       - name: Prepend MATLAB to PATH on Windows (PowerShell)
         if: runner.os == 'Windows'
-        run: echo "C:\Program Files\MATLAB\R2023b\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append     
+        run: echo "C:\Program Files\MATLAB\R2020b\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append     
       - name: Prepend MATLAB to PATH on Linux
         if: runner.os == 'Linux'
-        run: echo "/usr/local/MATLAB/R2023b/bin" >> $GITHUB_PATH
+        run: echo "/usr/local/MATLAB/R2020b/bin" >> $GITHUB_PATH
       - name: Prepend MATLAB to PATH on macOS
         if: runner.os == 'macOS'
-        run: echo "/Applications/MATLAB_R2023b.app/bin" >> $GITHUB_PATH
+        run: echo "/Applications/MATLAB_R2020b.app/bin" >> $GITHUB_PATH
       - name: Run script
         uses: matlab-actions/run-command@v2
         with:
           command: myscript
+```
+
+### Use MATLAB Batch Licensing Token
+On a GitHub-hosted runner, you need a [MATLAB batch licensing token](https://github.com/mathworks-ref-arch/matlab-dockerfile/blob/main/alternates/non-interactive/MATLAB-BATCH.md#matlab-batch-licensing-token) if your project is private or if your workflow includes transformation products, such as MATLAB Coder&trade; and MATLAB Compiler&trade;. Batch licensing tokens are strings that enable MATLAB to start in noninteractive environments. You can request a token by submitting the [MATLAB Batch Licensing Pilot](https://www.mathworks.com/support/batch-tokens.html) form. 
+
+To use a MATLAB batch licensing token:
+
+1. Set the token as a secret. For more information about secrets, see [Using secrets in GitHub Actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions).
+2. Map the secret to an environment variable named `MLM_LICENSE_TOKEN` in your workflow. 
+
+For example, use the latest release of MATLAB on a GitHub-hosted runner to run the tests in your private project. To install the latest release of MATLAB on the runner, specify the **Setup MATLAB** action in your workflow. To run the tests, specify the **Run MATLAB Tests** action. In this example, `MyToken` is the name of the secret that holds the batch licensing token.
+
+```YAML
+name: Use MATLAB Batch Licensing Token
+on: [push]
+env:
+  MLM_LICENSE_TOKEN: ${{ secrets.MyToken }}
+jobs:
+  my-job:
+    name: Run MATLAB Tests in Private Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+      - uses: actions/checkout@v4
+      - name: Set up MATLAB
+      - uses: matlab-actions/setup-matlab@v2
+      - name: Run tests
+      - uses: matlab-actions/run-tests@v2
 ```
 
 ## Notes
@@ -130,4 +161,4 @@ jobs:
 - [Continuous Integration with MATLAB on CI Platforms](https://www.mathworks.com/help/matlab/matlab_prog/continuous-integration-with-matlab-on-ci-platforms.html)
 
 ## Contact Us
-If you have any questions or suggestions, please contact MathWorks&reg; at [continuous-integration@mathworks.com](mailto:continuous-integration@mathworks.com).
+If you have any questions or suggestions, contact MathWorks at [continuous-integration@mathworks.com](mailto:continuous-integration@mathworks.com).
