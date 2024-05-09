@@ -34,11 +34,11 @@ When you define your workflow, specify this action as `matlab-actions/run-comman
 
 ## Examples
 
-### Run MATLAB Build on Self-Hosted Runner
-Starting in R2022b, the **Run MATLAB Build** action lets you run a build using the MATLAB build tool. You can use this action to run the tasks specified in a file named  `buildfile.m` in the root of your repository. For example, use a self-hosted runner to run the default tasks in your build plan as well as all the tasks on which they depend. To run the tasks, specify the **Run MATLAB Build** action in your workflow.
+### Run Default Tasks in Build File
+On a self-hosted runner, run the default tasks in a build file named `buildfile.m` in the root of your repository as well as all the tasks on which they depend. To run the tasks, specify the **Run MATLAB Build** action in your workflow. (The **Run MATLAB Build** action is supported in MATLAB R2022b and later.)
 
 ```yaml
-name: Run MATLAB Build on Self-Hosted Runner
+name: Run Default Tasks in Build File
 on: [push]
 jobs:
   my-job:
@@ -51,22 +51,22 @@ jobs:
         uses: matlab-actions/run-build@v2
 ```
 
-### Run MATLAB Tests on GitHub-Hosted Runner
-Set up a GitHub-hosted runner to automatically run the tests in your [MATLAB project](https://www.mathworks.com/help/matlab/projects.html) and generate test results in JUnit-style XML format and code coverage results in Cobertura XML format. To set up the latest release of MATLAB on the runner, specify the **Setup MATLAB** action in your workflow. To run the tests and generate the artifacts, specify the **Run MATLAB Tests** action.
+### Generate Test and Coverage Artifacts
+Using the latest release of MATLAB on a GitHub-hosted runner, run the tests in your [MATLAB project](https://www.mathworks.com/help/matlab/projects.html) and generate test results in JUnit-style XML format and code coverage results in Cobertura XML format. To set up the latest release of MATLAB on the runner, specify the **Setup MATLAB** action in your workflow. To run the tests and generate the artifacts, specify the **Run MATLAB Tests** action.
 
 ```yaml
-name: Run MATLAB Tests on GitHub-Hosted Runner
+name: Generate Test and Coverage Artifacts
 on: [push]
 jobs:
   my-job:
-    name: Run MATLAB Tests and Generate Artifacts
+    name: Run MATLAB Tests
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
-      - name: Run tests and generate artifacts
+      - name: Run tests
         uses: matlab-actions/run-tests@v2
         with:
           test-results-junit: test-results/results.xml
@@ -74,7 +74,7 @@ jobs:
 ```
 
 ### Run MATLAB Script
-Use a self-hosted runner to run the commands in a file named `myscript.m` in the root of your repository. To run the script, specify the **Run MATLAB Command** action in your workflow.
+Run the commands in a file named `myscript.m` in the root of your repository using MATLAB R2023b on a GitHub-hosted runner. To set up the specified release of MATLAB on the runner, specify the **Setup MATLAB** action in your workflow. To run the script, specify the **Run MATLAB Command** action.
 
 ```yaml
 name: Run MATLAB Script
@@ -82,10 +82,14 @@ on: [push]
 jobs:
   my-job:
     name: Run MATLAB Script
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          release: R2023b
       - name: Run script
         uses: matlab-actions/run-command@v2
         with:
