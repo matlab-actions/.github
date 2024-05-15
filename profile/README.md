@@ -74,7 +74,7 @@ jobs:
 ```
 
 ### Run MATLAB Script
-Run the commands in a file named `myscript.m` in the root of your repository using MATLAB R2023b on a GitHub-hosted runner. To set up the specified release of MATLAB on the runner, specify the **Setup MATLAB** action in your workflow. To run the script, specify the **Run MATLAB Command** action.
+Run the commands in a file named `myscript.m` in the root of your repository using MATLAB R2023b on a GitHub-hosted runner. To set up the specified release of MATLAB on the runner, specify the **Setup MATLAB** action with its `release` input in your workflow. To run the script, specify the **Run MATLAB Command** action.
 
 ```yaml
 name: Run MATLAB Script
@@ -134,7 +134,7 @@ To use a MATLAB batch licensing token:
 1. Set the token as a secret. For more information about secrets, see [Using secrets in GitHub Actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions).
 2. Map the secret to an environment variable named `MLM_LICENSE_TOKEN` in your workflow. 
 
-For example, use the latest release of MATLAB on a GitHub-hosted runner to run the tests in your private project. To install the latest release of MATLAB on the runner, specify the **Setup MATLAB** action in your workflow. To run the tests, specify the **Run MATLAB Tests** action. In this example, `MyToken` is the name of the secret that holds the batch licensing token.
+For example, use the latest release of MATLAB on a GitHub-hosted runner to run the tests in your private project. To set up the latest release of MATLAB on the runner, specify the **Setup MATLAB** action in your workflow. To run the tests, specify the **Run MATLAB Tests** action. In this example, `MyToken` is the name of the secret that holds the batch licensing token.
 
 ```YAML
 name: Use MATLAB Batch Licensing Token
