@@ -155,7 +155,7 @@ jobs:
 ```
 
 ## Use Virtual Display on Linux Runner
-GitHub-hosted runners based on Linux&reg; do not provide a display. To run MATLAB code that requires a display, first set up a virtual display on the runner by starting an Xvfb display server. For example, set up a virtual server to run the tests for an app created in MATLAB.
+GitHub-hosted Linux runners do not provide a display. To run MATLAB code that requires a display, first set up a virtual display on the runner by starting an Xvfb display server. For example, set up a virtual server to run the tests for an app created in MATLAB.
 
 ```YAML
 name: Use Virtual Display on Linux Runner
