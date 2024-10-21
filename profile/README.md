@@ -154,6 +154,31 @@ jobs:
         uses: matlab-actions/run-tests@v2
 ```
 
+### Use Virtual Display on Linux Runner
+GitHub-hosted Linux runners do not provide a display. To run MATLAB code that requires a display, such as tests that interact with an app UI, first set up a virtual display on the runner by starting an Xvfb display server. For example, set up a virtual server to run the tests for an app created in MATLAB.
+
+```YAML
+name: Use Virtual Display on Linux Runner
+on: [push]
+jobs:
+  my-job:
+    name: Test an App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Start virtual display server
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install -y xvfb
+          Xvfb :99 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v2
+      - name: Run tests
+        uses: matlab-actions/run-tests@v2
+```
+
 ## Notes
 * To use the GitHub actions for MATLAB, enable GitHub Actions for your repository. For more information about GitHub Actions permissions, see [Managing GitHub Actions settings for a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository).
 * By default, when you use the **Run MATLAB Build**, **Run MATLAB Tests**, or **Run MATLAB Command** action, the root of your repository serves as the MATLAB startup folder. To run your MATLAB code using a different folder, specify the `-sd` startup option or include the `cd` command when using the **Run MATLAB Command** action.
