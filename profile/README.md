@@ -33,7 +33,7 @@ Use the **Run MATLAB Command** action to run MATLAB scripts, functions, and stat
 When you define your workflow, specify this action as `matlab-actions/run-command@v2`. For more information, see [Action for Running MATLAB Commands](https://github.com/matlab-actions/run-command/).
 
 ## Examples
-Each example is this section provides the code that defines a workflow. To run an example, copy the example code to a workflow file and store that file in the `.github/workflows` directory of your repository. A workflow file can have an arbitrary name, but must have either a `.yml` or `.yaml` file extension (for example, `matlab.yml`).
+Each example in this section provides the code that defines a workflow. To run an example, copy the example code to a workflow file and store that file in the `.github/workflows` directory of your repository. A workflow file can have any name, but it must have either a `.yml` or `.yaml` file extension (for example, `matlab.yml`).
 
 ### Run Default Tasks in Build File
 On a self-hosted runner, run the default tasks in a build file named `buildfile.m` in the root of your repository as well as all the tasks on which they depend. To run the tasks, specify the **Run MATLAB Build** action in your workflow. (The **Run MATLAB Build** action is supported in MATLAB R2022b and later.)
