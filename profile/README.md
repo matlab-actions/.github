@@ -3,6 +3,9 @@ With [GitHub&reg; Actions](https://docs.github.com/en/free-pro-team@latest/actio
 - To use a GitHub-hosted runner, include the [Setup MATLAB](https://github.com/matlab-actions/setup-matlab/) action in your workflow to set up your preferred MATLAB release (R2021a or later) on the runner.
 - To use a self-hosted runner, set up a computer with MATLAB on its path and register the runner with GitHub Actions. (On self-hosted UNIX&reg; runners, you can also use the **Setup MATLAB** action instead of having MATLAB already installed.) The runner uses the topmost MATLAB release on the system path to execute your workflow.
 
+## Quick Start
+Use the [GitHub Actions Workflow Generator for MATLAB](https://matlab-actions.github.io/workflow-generator/) website to quickly set up GitHub Actions for your MATLAB repository. Enter the repository name, and the generator creates a starter workflow that you can review and commit with a click.
+
 ## Overview of Actions
 To run MATLAB in your workflow, use these actions when you define your workflow in the `.github/workflows` directory of your repository:
 
