@@ -192,5 +192,9 @@ jobs:
 - [Continuous Integration with MATLAB and Simulink](https://www.mathworks.com/solutions/continuous-integration.html)
 - [Continuous Integration with MATLAB on CI Platforms](https://www.mathworks.com/help/matlab/matlab_prog/continuous-integration-with-matlab-on-ci-platforms.html)
 
-## Contact Us
-If you have any questions or suggestions, contact MathWorks at [continuous-integration@mathworks.com](mailto:continuous-integration@mathworks.com).
+## Feedback and Support
+If you encounter a product licensing issue, consider requesting a MATLAB batch licensing token to use in your pipeline. For more information, see [Use MATLAB Batch Licensing Token](#use-matlab-batch-licensing-token).
+
+If you have an enhancement request or other feedback about an action, create an issue on the Issues page for that action.
+
+For support, contact [MathWorks Technical Support](https://www.mathworks.com/support/contact_us.html).
