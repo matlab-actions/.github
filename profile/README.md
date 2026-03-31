@@ -17,22 +17,22 @@ To run MATLAB in your workflow, use these actions when you define your workflow 
 ### Setup MATLAB
 Use the **Setup MATLAB** action to set up MATLAB and other MathWorks&reg; products on a GitHub-hosted (Linux&reg;, Windows&reg;, or macOS) runner or self-hosted UNIX (Linux or macOS) runner. The action sets up your preferred MATLAB release (R2021a or later) on the runner. If you do not specify a release, the action sets up the latest release of MATLAB.
 
-When you define your workflow, specify this action as `matlab-actions/setup-matlab@v2`. For more information, see [Action for Setting Up MATLAB](https://github.com/matlab-actions/setup-matlab/).
+When you define your workflow, specify this action as `matlab-actions/setup-matlab@v3`. For more information, see [Action for Setting Up MATLAB](https://github.com/matlab-actions/setup-matlab/).
 
 ### Run MATLAB Build
 Use the **Run MATLAB Build** action to invoke the MATLAB build tool and run build tasks, such as identifying code issues, running tests, and packaging a toolbox. To use this action, you need MATLAB R2022b or a later release.
 
-When you define your workflow, specify this action as `matlab-actions/run-build@v2`. For more information, see [Action for Running MATLAB Builds](https://github.com/matlab-actions/run-build).
+When you define your workflow, specify this action as `matlab-actions/run-build@v3`. For more information, see [Action for Running MATLAB Builds](https://github.com/matlab-actions/run-build).
 
 ### Run MATLAB Tests
 Use the **Run MATLAB Tests** action to automatically run tests authored using the MATLAB unit testing framework or Simulink Test&trade;. You can use this action with optional inputs to generate various test and coverage artifacts.
 
-When you define your workflow, specify this action as `matlab-actions/run-tests@v2`. For more information, see [Action for Running MATLAB Tests](https://github.com/matlab-actions/run-tests/).
+When you define your workflow, specify this action as `matlab-actions/run-tests@v3`. For more information, see [Action for Running MATLAB Tests](https://github.com/matlab-actions/run-tests/).
 
 ### Run MATLAB Command
 Use the **Run MATLAB Command** action to run MATLAB scripts, functions, and statements. You can use this action to flexibly customize your test run or add a step in MATLAB to your workflow. 
 
-When you define your workflow, specify this action as `matlab-actions/run-command@v2`. For more information, see [Action for Running MATLAB Commands](https://github.com/matlab-actions/run-command/).
+When you define your workflow, specify this action as `matlab-actions/run-command@v3`. For more information, see [Action for Running MATLAB Commands](https://github.com/matlab-actions/run-command/).
 
 ## Examples
 Each example in this section provides the code that defines a workflow. To run an example, copy the example code to a workflow file and store that file in the `.github/workflows` directory of your repository. A workflow file can have any name, but it must have either a `.yml` or `.yaml` file extension (for example, `matlab.yml`).
@@ -49,9 +49,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Run build
-        uses: matlab-actions/run-build@v2
+        uses: matlab-actions/run-build@v3
 ```
 
 ### Generate Test and Coverage Artifacts
@@ -66,11 +66,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up MATLAB
-        uses: matlab-actions/setup-matlab@v2
+        uses: matlab-actions/setup-matlab@v3
       - name: Run tests
-        uses: matlab-actions/run-tests@v2
+        uses: matlab-actions/run-tests@v3
         with:
           test-results-junit: test-results/results.xml
           code-coverage-cobertura: code-coverage/coverage.xml
@@ -88,13 +88,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up MATLAB
-        uses: matlab-actions/setup-matlab@v2
+        uses: matlab-actions/setup-matlab@v3
         with:
           release: R2024a
       - name: Run script
-        uses: matlab-actions/run-command@v2
+        uses: matlab-actions/run-command@v3
         with:
           command: myscript
 ```
@@ -113,7 +113,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Prepend MATLAB to PATH on Windows (PowerShell)
         if: runner.os == 'Windows'
         run: echo "C:\Program Files\MATLAB\R2020b\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append     
@@ -124,7 +124,7 @@ jobs:
         if: runner.os == 'macOS'
         run: echo "/Applications/MATLAB_R2020b.app/bin" >> $GITHUB_PATH
       - name: Run script
-        uses: matlab-actions/run-command@v2
+        uses: matlab-actions/run-command@v3
         with:
           command: myscript
 ```
@@ -150,11 +150,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up MATLAB
-        uses: matlab-actions/setup-matlab@v2
+        uses: matlab-actions/setup-matlab@v3
       - name: Run tests
-        uses: matlab-actions/run-tests@v2
+        uses: matlab-actions/run-tests@v3
 ```
 
 ### Use Virtual Display on Linux Runner
@@ -169,7 +169,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Start virtual display server
         if: runner.os == 'Linux'
         run: |
@@ -177,9 +177,9 @@ jobs:
           Xvfb :99 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
       - name: Set up MATLAB
-        uses: matlab-actions/setup-matlab@v2
+        uses: matlab-actions/setup-matlab@v3
       - name: Run tests
-        uses: matlab-actions/run-tests@v2
+        uses: matlab-actions/run-tests@v3
 ```
 
 ## Notes
