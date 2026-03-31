@@ -49,7 +49,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Run build
         uses: matlab-actions/run-build@v3
 ```
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v3
       - name: Run tests
@@ -88,7 +88,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
@@ -113,7 +113,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Prepend MATLAB to PATH on Windows (PowerShell)
         if: runner.os == 'Windows'
         run: echo "C:\Program Files\MATLAB\R2020b\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append     
@@ -150,7 +150,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v3
       - name: Run tests
@@ -169,7 +169,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Start virtual display server
         if: runner.os == 'Linux'
         run: |
