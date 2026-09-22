@@ -1,5 +1,5 @@
 # Use MATLAB with GitHub Actions
-With [GitHub&reg; Actions](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions), you can build and test your MATLAB&reg; project as part of your workflow. For example, you can automatically identify any code issues in your project, run tests and generate test and coverage artifacts, and package your files into a toolbox. The GitHub actions for MATLAB let you run MATLAB code and Simulink&reg; models on [GitHub-hosted](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners) and [self-hosted](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) runners:
+With [GitHub&reg; Actions](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions), you can build and test your MATLAB&reg; project as part of your workflow. For example, you can automatically identify any code issues in your project, run tests and generate test and coverage artifacts, and build a MATLAB package. The GitHub actions for MATLAB let you run MATLAB code and Simulink&reg; models on [GitHub-hosted](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners) and [self-hosted](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) runners:
 - To use a GitHub-hosted runner, include the [Setup MATLAB](https://github.com/matlab-actions/setup-matlab/) action in your workflow to set up your preferred MATLAB release (R2021a or later) on the runner.
 - To use a self-hosted runner, set up a computer with MATLAB on its path and register the runner with GitHub Actions. (On self-hosted UNIX&reg; runners, you can also use the **Setup MATLAB** action instead of having MATLAB already installed.) The runner uses the topmost MATLAB release on the system path to execute your workflow.
 
@@ -20,7 +20,7 @@ Use the **Setup MATLAB** action to set up MATLAB and other MathWorks&reg; produc
 When you define your workflow, specify this action as `matlab-actions/setup-matlab@v3`. For more information, see [Action for Setting Up MATLAB](https://github.com/matlab-actions/setup-matlab/).
 
 ### Run MATLAB Build
-Use the **Run MATLAB Build** action to invoke the MATLAB build tool and run build tasks, such as identifying code issues, running tests, and packaging a toolbox. To use this action, you need MATLAB R2022b or a later release.
+Use the **Run MATLAB Build** action to invoke the MATLAB build tool and run build tasks, such as identifying code issues, running tests, and building a MATLAB package. To use this action, you need MATLAB R2022b or a later release.
 
 When you define your workflow, specify this action as `matlab-actions/run-build@v3`. For more information, see [Action for Running MATLAB Builds](https://github.com/matlab-actions/run-build).
 
