@@ -20,7 +20,7 @@ Use the **Setup MATLAB** action to set up MATLAB and other MathWorks&reg; produc
 When you define your workflow, specify this action as `matlab-actions/setup-matlab@v3`. For more information, see [Action for Setting Up MATLAB](https://github.com/matlab-actions/setup-matlab/).
 
 ### Run MATLAB Build
-Use the **Run MATLAB Build** action to invoke the MATLAB build tool and run build tasks, such as identifying code issues, running tests, and packaging a toolbox. To use this action, you need MATLAB R2022b or a later release.
+Use the **Run MATLAB Build** action to invoke the MATLAB build tool and run build tasks, such as identifying code issues, running tests, and building a MATLAB package. To use this action, you need MATLAB R2022b or a later release.
 
 When you define your workflow, specify this action as `matlab-actions/run-build@v3`. For more information, see [Action for Running MATLAB Builds](https://github.com/matlab-actions/run-build).
 
